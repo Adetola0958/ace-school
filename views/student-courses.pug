@@ -1,0 +1,25 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h6.mb-3 Examination available
+                        .row.justify-content-center
+                            .col-md-10
+                                .card
+                                    if courses
+                                        each course in courses
+                                            div(class="box mb-2")
+                                                - let courseUrl = '/student/exam/' + exam.name + '/courses/' + course.courseName + '/start-exam'
+                                                p 
+                                                    span(class="float-left") #[i(class="fa fa-object-group mr-2")] #{course.courseName} 
+                                                    span(class="float-right") #[a(href=courseUrl class="main-link") Write]
+                                    if noCourse
+                                        p.text-small #{noCourse}
+
+        include includes/footer.pug

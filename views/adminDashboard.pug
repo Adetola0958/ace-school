@@ -1,0 +1,36 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h6 Overview
+                       
+                        div(class="row mt-4")
+                            div(class="col-lg-4 col-md-6 mb-3")
+                                div(class="card stat-box")
+                                    p.total New Schools
+                                    div(class="d-flex justify-content-between")
+                                        p(class="number") #{newSchools}
+                                        p(class="icon") 
+                                            i(class="fa fa-bar-chart")
+                                            i(class="fa fa-bar-chart")
+                                            i(class="fa fa-bar-chart")
+
+                            div(class="col-lg-4 col-md-6 mb-3")
+                                div(class="card stat-box")
+                                    p.total Approved Schools
+                                    div(class="d-flex justify-content-between")
+                                        p(class="number") #{approvedSchools}
+                                        p(class="icon2") 
+                                            i(class="fa fa-bar-chart")
+                                            i(class="fa fa-bar-chart")
+                                            i(class="fa fa-bar-chart")
+  
+        include includes/footer.pug
+
+

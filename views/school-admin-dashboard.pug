@@ -1,0 +1,108 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h5 Overview
+
+                        div(class="row")
+                            div(class="col-lg-4 col-md-6 mb-3")
+                                div(class="card stat-box")
+                                    p.total Total Students
+                                    div(class="d-flex justify-content-between")
+                                        p(class="number") #{students}
+                                        p(class="icon") 
+                                            i(class="fa fa-bar-chart")
+                                            i(class="fa fa-bar-chart")
+                                            i(class="fa fa-bar-chart")
+
+                            div(class="col-lg-4 col-md-6 mb-3")
+                                div(class="card stat-box")
+                                    p.total Total Staffs
+                                    div(class="d-flex justify-content-between")
+                                        p(class="number") #{staffs}
+                                        p(class="icon2") 
+                                            i(class="fa fa-bar-chart")
+                                            i(class="fa fa-bar-chart")
+                                            i(class="fa fa-bar-chart")
+
+                            div(class="col-lg-4 col-md-6 mb-3")
+                                div(class="card stat-box")
+                                    p.total Total Classes
+                                    div(class="d-flex justify-content-between")
+                                        p(class="number") #{classes}
+                                        p(class="icon3") 
+                                            i(class="fa fa-bar-chart")
+                                            i(class="fa fa-bar-chart")
+                                            i(class="fa fa-bar-chart")
+
+                            div(class="col-lg-4 col-md-6 mb-3")
+                                div(class="card stat-box")
+                                    p.total Total Exams
+                                    div(class="d-flex justify-content-between")
+                                        p(class="number") #{exams}
+                                        p(class="icon") 
+                                            i(class="fa fa-bar-chart")
+                                            i(class="fa fa-bar-chart")
+                                            i(class="fa fa-bar-chart")
+                        
+                            div(class="col-lg-4 col-md-6 mb-3")
+                                div(class="card stat-box")
+                                    p.total Exam in session
+                                    div(class="d-flex justify-content-between")
+                                        p(class="number") #{progress}
+                                        p(class="icon2") 
+                                            i(class="fa fa-bar-chart")
+                                            i(class="fa fa-bar-chart")
+                                            i(class="fa fa-bar-chart")
+
+                            div(class="col-lg-4 col-md-6 mb-3")
+                                div(class="card stat-box")
+                                    p.total Inventory Records
+                                    div(class="d-flex justify-content-between")
+                                        p(class="number") 0
+                                        p(class="icon3") 
+                                            i(class="fa fa-bar-chart")
+                                            i(class="fa fa-bar-chart")
+                                            i(class="fa fa-bar-chart")
+
+                        div(class="card card-chart d-flex mb-3")
+                            div(class="row")
+                                div(class="col-12 mb-2") 
+                                    P Students' attendance this week.
+                                div(class="col-12")
+                                    canvas(id="bar_chart" style="height:300px;")
+
+                        div(class="row")
+                            div(class="col-lg-7 mb-3")
+                                div(class="card card-chart")
+                                    div(class="row")
+                                        div(class="col-12 mb-2") 
+                                            P Earnings over the years
+                                        div(class="col-12")
+                                            canvas(id="myAreaChart" style="height:250px;")
+                            div(class="col-lg-5 mb-3")
+                                div(class="card card-chart")
+                                    div(class="row")
+                                        div(class="col-12 mb-3")
+                                            canvas(id="myPieChart" style="height:250px;")
+                                        div(class="col-12 mt-2 text-center") 
+                                            span(class="mr-2")
+                                                i(class="fa fa-circle text-primary pr-1") 
+                                                span Students
+                                            span(class="mr-2")
+                                                i(class="fa fa-circle text-success pr-1")
+                                                span Staffs
+                                            span(class="mr-2")
+                                                i(class="fa fa-circle text-info pr-1")
+                                                span Non-Staffs
+                    
+  
+        include includes/footer.pug
+
+

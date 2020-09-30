@@ -1,0 +1,36 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h5 #{title}
+                        .row.justify-content-center
+                            .col-md-10.card
+                                if noStudent
+                                    p #{noStudent}
+                                if students
+                                    div(class="table-responsive card")
+                                        table(class="table table-bordered" id="dataTable")
+                                            thead.thead-light 
+                                                tr 
+                                                    th S/N 
+                                                    th Student ID
+                                                    th Full Name
+                                                    th Edit/View
+                                            tbody 
+                                                each student, index in students
+                                                    - let name = `${student.lastName} ${student.firstName} ${student.otherName}`
+                                                    - let regNo = student.studentID
+                                                    - let viewUrl = "/school/new-student/" + student._id
+                                                    tr 
+                                                        td #{index + 1} 
+                                                        td #{regNo}
+                                                        td #{name}
+                                                        td #[a(href=viewUrl class="main-link") View]
+
+        include includes/footer.pug

@@ -1,0 +1,40 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h6.mb-3 Result Analysis for #{className}
+                        
+                        if results
+                            div(class="text-center mb-3")
+                                if firstResult.released
+                                    - let unReleaseUrl = '/school/report/' + exam.examCode + '/' + className + '/unrelease'
+                                    a(href=unReleaseUrl class="red-btn") Unrelease the results
+                                else
+                                    - let releaseUrl = '/school/report/' + exam.examCode + '/' + className + '/release'
+                                    a(href=releaseUrl class="main-btn") Release results to Students
+                            div(class="table-responsive card form-body")
+                                table.table.table-bordered#dataTable
+                                    thead.thead-light 
+                                        tr 
+                                            th Reg Number
+                                            th Name
+                                            each cls in firstResult.result
+                                                th #{cls.courseName}
+                                    tbody 
+                                        each result, index in results 
+                                            tr
+                                                td #{studentID[result.student]}
+                                                td #{studentName[result.student]}
+                                                    each res in result.result
+                                                        td #{res.score}
+                        if noResult
+                            p.text-small #{noResult}
+                                    
+
+        include includes/footer.pug

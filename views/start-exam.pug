@@ -1,0 +1,29 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        if cantWrite
+                            p #[b #{cantWrite}]
+                        else
+                            div(class="row justify-content-center")
+                                div(class="col-md-8")
+                                    div(class="card")
+                                        h2.welcome-text.mb-4 #{exam.name}
+                                        p #[strong Subject]: #[i #{examQuestions.courseName}]
+                                        p #[strong Class] : #[i #{examQuestions.className}]
+                                        p #[strong Duration] : #[i #{examQuestions.duration} minutes]
+                                        p #[strong Instructions] : #[i #{examQuestions.instruction}]
+                                        p #[strong Note] : #[i You can't attempt this exam multiple times. Once you click on start exam, ensure you don't close your browser while writing your exam. If your time lapses, your answers are submitted automatically.]
+                                        - let examUrl = '/student/exam/' + exam.name + '/courses/' + examQuestions.courseName + '/running'
+                                        .row
+                                            .col-5
+                                                a(class="main-btn" href=examUrl) Start Exam
+
+
+        include includes/footer.pug

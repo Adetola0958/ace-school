@@ -1,0 +1,37 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h5 All Lesson Notes [#{term.name}]
+                        div(class="card")
+                            div(class="card-body")    
+                                if lessonNotes
+                                    div(class="table-responsive card")
+                                        table(class="table table-bordered" id="dataTable")
+                                            thead.thead-light
+                                                tr
+                                                    th Subject
+                                                    th Week
+                                                    th Action
+                                                    th Status
+                                            tbody
+                                                each lessonNote in lessonNotes
+                                                    -let singleLessonNote = '/staff/lesson-note/' + term.name + '/' + lessonNote._id
+                                                    tr
+                                                        td #{lessonNote.subject}
+                                                        td #{lessonNote.week}
+                                                        td #[a(href=singleLessonNote) view]
+                                                        if lessonNote.status == 'Pending'
+                                                            td.text-danger Pending
+                                                        else    
+                                                            td.text-success Approved
+                                if noNote
+                                    p.text-small #{noNote}
+
+        include includes/footer.pug

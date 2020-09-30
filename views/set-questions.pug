@@ -1,0 +1,52 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        form(method="POST" enctype="multipart/form-data")
+                            .row.justify-content-center
+                                .col-md-10.card
+                                    .row.mt-3
+                                        .col-sm-2
+                                            label(for="ID" class="label") Question:
+                                        .col-sm-10
+                                            textarea(class="form-control mb-4" name="question")
+                                        .col-sm-2
+                                            label(for="class" class="label") Image:
+                                        .col-sm-10
+                                            input(type="file" class="mb-4" name="picture")
+                                        .col-sm-2
+                                            label(for="class" class="label") Option A:
+                                        .col-sm-10
+                                            input(type="text" class="form-control mb-4" id="optionA" name="optionA")
+                                        .col-sm-2
+                                            label(for="class" class="label") Option B:
+                                        .col-sm-10
+                                            input(type="text" class="form-control mb-4" id="optionB" name="optionB")
+                                        .col-sm-2
+                                            label(for="class" class="label") Option C:
+                                        .col-sm-10
+                                            input(type="text" class="form-control mb-4" id="optionC" name="optionC")
+                                        .col-sm-2
+                                            label(for="class" class="label") Option D:
+                                        .col-sm-10
+                                            input(type="text" class="form-control mb-4" id="optionD" name="optionD")
+                                        .col-sm-2
+                                            label(for="class" class="label") Answer:
+                                        .col-sm-10
+                                            input(type="text" class="form-control mb-4" id="correctOption" name="correctOption")
+                                        .col-sm-2
+                                            label(for="class" class="label") Mark:
+                                        .col-sm-10
+                                            input(type="number" class="form-control mb-4" name="mark")
+                                        .col-12.text-center
+                                            input(type="submit" value="Create" class="main-btn" id="submit")
+                                            p(class="err-msg mt-2" id="on-submit")
+                                    
+        script(src="/javascripts/questions.js")
+        include includes/footer.pug

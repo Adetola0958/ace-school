@@ -1,0 +1,38 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h4 Approved Schools
+
+                        div(class="row justify-content-center mt-4")
+                            div(class="col-md-10")
+                                if noSchool
+                                    p #{noSchool}
+                                if approvedSchools
+                                    div(class="table-responsive card form-body")
+                                        table(class="table table-bordered" id="dataTable")
+                                            thead.thead-light
+                                                tr
+                                                    th School ID
+                                                    th School Name
+                                                    th Email
+                                                    th Action
+                                            tbody
+                                                each school in approvedSchools
+                                                    - let name = school.schoolName
+                                                    - let email = school.schoolEmail
+                                                    - let code = school.schoolCode
+                                                    - let viewUrl = "/admin/school/" + school._id 
+                                                    tr
+                                                        td #{code}
+                                                        td #{name}
+                                                        td #{email}
+                                                        td #[a(href=viewUrl class="main-link") View]
+
+        include includes/footer.pug

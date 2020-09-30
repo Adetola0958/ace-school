@@ -1,0 +1,39 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h6.mb-3 Results
+                        div(class="row justify-content-center")
+                            div(class="col-md-10")
+                                div(class="")
+                                    if noResult
+                                        p.text-small #{noResult}
+                
+                                    if results
+                                        div(class="card table-responsive" style="overflow-x:auto;")
+                                            table.table.table-bordered 
+                                                thead.thead-light 
+                                                    tr 
+                                                        th S/N 
+                                                        th Reg Number
+                                                        th Name
+                                                        th Score
+                                                        th Grade
+                                                tbody 
+                                                    each result, index in results
+                                                        tr
+                                                            td #{index + 1}
+                                                            td #{studentID[result.student]}
+                                                            td #{studentName[result.student]}
+                                                            each res in result.result
+                                                                if res.courseName == courseName
+                                                                    td(id="score") #{res.score}
+                                                            td(id=result.score class="grade")
+        script(src="/javascripts/grading.js")
+        include includes/footer.pug

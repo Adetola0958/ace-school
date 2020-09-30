@@ -1,0 +1,28 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/style.css')
+    body
+        div(class="container-fluid")
+            div(class="row")
+                div(class="col-lg-6 chelcin_bg")
+                div(class="col-lg-6")
+                    .row
+                        div(class="col-2")
+                        div(class="col-8")
+                            div(class="form_bg")
+                                div(class="form_container")
+                                    div(class="form_content")
+                                        p(class="chelcin_logo") Ace School
+                                        p(class="welcome_text") Welcome back! Please login to your account.
+                                        form(method="POST" class="mt-4")
+                                            if error
+                                                p.err-msg.text-center #{error}
+                                            input(type="text" name="code" placeholder="Parent ID" class="form-control input_text") 
+                                            input(type="email" name="email" placeholder="Email" class="form-control input_text mt-3") 
+                                            input(type="password" name="password" placeholder="Password" class="form-control mt-3 input_text") 
+                                        
+                                            div(class="justify-content-center mb-5 mt-4")
+                                                button(class="login_btn" type="submit") Login
+                                            
+                                        a(href="#" class="fixed-b text-center welcome_text") Terms of use. Privacy Policy
+                        div(class="col-2")

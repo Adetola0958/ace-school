@@ -1,0 +1,24 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h5.mb-3 Select term to view or mark attendance
+                        .row.justify-content-center
+                            .col-md-10
+                                .card
+                                    h6.mb-4 #[strong Session:] #{session.name}
+                                    if term
+                                        .row
+                                            each t in term
+                                                .col-lg-4.col-sm-6
+                                                    .box-field
+                                                        -let termUrl = "/staff/attendance/" + t.name
+                                                        p #[a(href=termUrl class="main-link") #{t.name}]
+
+        include includes/footer.pug

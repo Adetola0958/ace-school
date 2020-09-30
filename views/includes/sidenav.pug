@@ -1,0 +1,160 @@
+block content
+    ul(class="navbar-nav sidebar accordion" id="accordionSidebar")
+        span(class="sidebar-brand")
+            div(class="sidebar-brand-text") 
+                span(class="logo") Ace School
+                span(class="text-center d-none d-md-inline bar")
+                    i(class="fa fa-bars" id="sidebarToggle")
+        if admin
+            li(class="nav-item")
+                a(class=`nav-link ${dash_active}` href="/admin/dashboard")
+                    i(class="fa fa-fw fa-folder")
+                    span Dashboard
+        
+            li(class="nav-item")
+                a(class=`nav-link ${new_active}` href="/admin/new-schools")
+                    i(class="fa fa-fw fa-folder")
+                    span New Schools
+
+            li(class="nav-item")
+                a(class=`nav-link ${approved_active}` href="/admin/approved-schools")
+                    i(class="fa fa-fw fa-folder")
+                    span Approved Schools
+
+            li(class="nav-item")
+                a(class="nav-link" href="#")
+                    i(class="fa fa-fw fa-folder")
+                    span Mail
+
+        if schoolAdmin
+            li(class="nav-item")
+                a(class=`nav-link ${dash_active}` href="/school/dashboard")
+                    i(class="fa fa-fw fa-folder")
+                    span Dashboard
+
+            li(class="nav-item")
+                a(class=`nav-link ${session_active}` href="/school/session")
+                    i(class="fa fa-fw fa-folder")
+                    span Session
+
+            li(class="nav-item")
+                a(class=`nav-link ${subject_active}` href="/school/subjects")
+                    i(class="fa fa-fw fa-folder")
+                    span Subjects
+
+            li(class="nav-item")
+                a(class=`nav-link ${class_active}` href="/school/class")
+                    i(class="fa fa-fw fa-folder")
+                    span Classes
+
+            li(class="nav-item")
+                a(class=`nav-link ${student_active}` href="/school/new-student")
+                    i(class="fa fa-fw fa-folder")
+                    span New Student
+
+            li(class="nav-item")
+                a(class=`nav-link ${parent_active}` href="/school/parent")
+                    i(class="fa fa-fw fa-folder")
+                    span Parents
+
+            li(class="nav-item")
+                a(class=`nav-link ${staff_active}` href="/school/staff")
+                    i(class="fa fa-fw fa-folder")
+                    span Staffs
+
+            li(class="nav-item")
+                a(class=`nav-link ${exam_active}` href="/school/exam")
+                    i(class="fa fa-fw fa-folder")
+                    span Exams
+
+            li(class="nav-item")
+                a(class=`nav-link ${report_active}` href="/school/report")
+                    i(class="fa fa-fw fa-folder")
+                    span Exam Reports
+
+            li(class="nav-item")
+                a(class=`nav-link ${attendance_active}` href="/school/attendance")
+                    i(class="fa fa-fw fa-folder")
+                    span Attendance
+
+            li(class="nav-item")
+                a(class=`nav-link ${note_active}` href="/school/lesson-notes")
+                    i(class="fa fa-fw fa-folder")
+                    span Lesson Notes
+
+            li(class="nav-item")
+                a(class=`nav-link ${mail_active}` href="/school/mail")
+                    i(class="fa fa-fw fa-folder")
+                    span Mail
+                
+            li(class="nav-item")
+                a(class=`nav-link ${help_active}` href="/school/help")
+                    i(class="fa fa-fw fa-folder")
+                    span Help Center
+        
+        if staff
+            li(class="nav-item")
+                a(class=`nav-link ${dash_active}` href="/staff/dashboard")
+                    i(class="fa fa-fw fa-folder")
+                    span Dashboard
+            if staff.role == "Teacher"
+                li(class="nav-item")
+                    a(class=`nav-link ${exam_active}` href="/staff/exam")
+                        i(class="fa fa-fw fa-folder")
+                        span Exam
+
+                li(class="nav-item")
+                    a(class=`nav-link ${attendance_active}` href="/staff/attendance")
+                        i(class="fa fa-fw fa-folder")
+                        span Attendance
+
+                li(class="nav-item")
+                    a(class=`nav-link ${notes_active}` href="")
+                        i(class="fa fa-fw fa-folder")
+                        span Lesson Notes
+
+                li(class="nav-item")
+                    a(class=`nav-link ${contact_active}` href="#")
+                        i(class="fa fa-fw fa-folder")
+                        span Contact Admin
+
+        if student
+            li(class="nav-item")
+                a(class=`nav-link ${dash_active}` href="/student/dashboard")
+                    i(class="fa fa-fw fa-folder")
+                    span Dashboard
+        
+            li(class="nav-item")
+                a(class=`nav-link ${exam_active}` href="/student/exam")
+                    i(class="fa fa-fw fa-folder")
+                    span Exam
+
+            li(class="nav-item")
+                a(class=`nav-link ${attendance_active}` href="#")
+                    i(class="fa fa-fw fa-folder")
+                    span Attendance 
+
+            li(class="nav-item")
+                a(class=`nav-link ${materials_active}` href="#")
+                    i(class="fa fa-fw fa-folder")
+                    span Materials
+
+            li(class="nav-item")
+                a(class=`nav-link ${report_active}` href="#")
+                    i(class="fa fa-fw fa-folder")
+                    span Report Card
+
+        if parent
+            li(class="nav-item")
+                a(class=`nav-link ${dash_active}` href="/parent/dashboard")
+                    i(class="fa fa-fw fa-folder")
+                    span Dashboard
+
+            li(class="nav-item")
+                a(class=`nav-link ${student_active}` href="/parent/student")
+                    i(class="fa fa-fw fa-folder")
+                    span Child(ren)
+
+        hr(class="sidebar-divider")
+
+         

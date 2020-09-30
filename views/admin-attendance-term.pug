@@ -1,0 +1,28 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        .row.justify-content-center
+                            .col-md-10
+                                .card
+                                    h6 #{session.name}
+                                    h6(class="mb-4") Select a Term
+                                    if term.length > 0
+                                        .row
+                                            each t in term
+                                                - let classUrl = "/school/attendance/" + session._id + '/' + t.name
+                                                .col-md-4.mb-3
+                                                    a(href=classUrl)
+                                                        div(class="box-field")
+                                                            span #{t.name}
+                                    else
+                                        hr
+                                        p.text-small Seems no term has been added to this session.
+
+        include includes/footer.pug

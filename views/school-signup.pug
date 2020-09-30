@@ -1,0 +1,55 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/style.css')
+    body
+        div(class="container-fluid")
+            div(class="row")
+                div(class="col-lg-6 chelcin_bg")
+                div(class="col-lg-6")
+                    .row
+                        div(class="col-2")
+                        div(class="col-8")
+                            div(class="form_bg")
+                                div(class="form_container")
+                                    div(class="form_content2")
+                                        p(class="chelcin_logo") Ace School
+                                        p(class="welcome_text") Please complete to create your account.
+                                        form(method="POST" class="mt-4")
+                                            input(type="text" name="schoolName" placeholder="School Name" class="school form-control mb-3 input_text") 
+                                            div(class="row")
+                                                div(class="col-sm-6 mb-3")
+                                                    input(type="text" name="schoolAdminName" placeholder="Admin Name" class="admin form-control input_text")
+                                                div(class="col-sm-6 mb-3") 
+                                                    input(type="text" name="schoolNumber" placeholder="Office Number" class="office form-control input_text")
+                                            input(type="email" name="schoolEmail" placeholder="Email" id="email" class="form-control mb-3 input_text")
+                                            p.email-feedback 
+                                            div(class="row")
+                                                div(class="col-sm-6 mb-3")
+                                                    input(type="password" name="password" placeholder="Password" id="password" class="form-control input_text")
+                                                    p.password-feedback 
+                                                div(class="col-sm-6 mb-3")
+                                                    input(type="password" placeholder="Confirm Password" id="confirmPass" class="form-control input_text")
+                                                    p.cpassword-feedback
+                                            input(type="text" name="address" placeholder="Address" class="address form-control mb-3 input_text")
+                                            div(class="row")
+                                                div(class="col-sm-6")
+                                                    input(type="text" name="state" placeholder="State" class="state form-control mb-3 input_text") 
+                                                div(class="col-sm-6") 
+                                                    input(type="text" name="country" placeholder="Country" class="country form-control mb-3 input_text")
+                                            div
+                                                span.float-left
+                                                    input(type="checkbox" class="check mt-4") 
+                                                    span.pl-2.welcome_text I agree with terms and conditions
+                                                p.clearfix
+                                            div
+                                                p(class="submit")
+                                            div
+                                                button(class="login_btn mb-3" id="submit" type="submit") Sign up
+                                            a(href="/school" class="mt-5 text-center welcome_text") Already have an account? Sign in
+
+                                            p #[a(href="#" class="text-center welcome_text") Terms of use. Privacy Policy]
+
+
+                div(class="col-2")
+    script(src="/javascripts/schoolAdmin.js" type="module")
+    include includes/footer.pug

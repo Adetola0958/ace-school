@@ -1,0 +1,51 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h6.mb-3 Profile
+                        div(class="row justify-content-center")
+                            div(class="col-md-10")
+                                div(class="row")
+                                    div(class="col-md-5")
+                                        div(class="card")
+                                            if parent.profilePhoto
+                                                - let imageUrl = "/uploads/schools/" + code + "/parents/" + parent.profilePhoto
+                                                img(src=imageUrl alt="" width="100%" height="300px")
+                                            else
+                                                img(src="/images/default-avatar.png" alt="" width="100%" height="300px")
+                                            
+                                    div(class="col-md-7")
+                                        div(class="card-box")
+                                            .row
+                                                .col-3
+                                                    label(for="ID" class="label") Parent ID:
+                                                .col-9
+                                                    input(type="text" value= parent.parentID class="profile-form mb-4" readonly)
+                                                .col-3
+                                                    label(for="name" class="label") Name:
+                                                .col-9
+                                                    input(type="text" value= parent.name class="profile-form mb-4" name="name" readonly)
+                                                .col-3
+                                                    label(for="ward" class="label") Child(ren):
+                                                .col-9
+                                                    input(type="text" value= student.firstName class="profile-form mb-4" readonly)
+                                                .col-3
+                                                    label(for="email" class="label") Email:
+                                                .col-9
+                                                    input(type="email" value= parent.email class="profile-form mb-4" name="otherName" readonly)
+                                                .col-3
+                                                    label(for="number" class="label") Number:
+                                                .col-9
+                                                    input(type="tel" value= parent.number class="profile-form mb-4" name="number" readonly)
+                                                .col-3
+                                                    label(for="gender" class="label") Role:
+                                                .col-9
+                                                    input(type="text" value= parent.role class="profile-form mb-4" name="gender" readonly)
+
+        include includes/footer.pug

@@ -1,0 +1,54 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+
+                        if noClassName
+                            .card
+                                p.text-small #{noClassName}
+                        .row.justify-content-center
+                            .col-md-8
+                                if error
+                                    if error.length != 0
+                                        .alert.alert-danger.alert-dismissible.fade-in(role="alert")
+                                            button.close(type="button" data-dismiss="alert" aria-label="close")
+                                                span(aria-hidden="true") ×
+                                            span #{error}
+
+                                if success
+                                    if success.length != 0
+                                        .alert.alert-success.alert-dismissible.fade-in(role="alert")
+                                            button.close(type="button" data-dismiss="alert" aria-label="close")
+                                                span(aria-hidden="true") ×
+                                            span #{success}
+                                div(class="mt-2")
+
+                                    if className
+                                        div(class="table-responsive form-body card")
+                                            table(class="table table-bordered" id="dataTable")
+                                                thead.thead-light
+                                                    tr
+                                                        th Class
+                                                        th Subjects Offered
+                                                        th Class Teacher
+                                                tbody
+                                                    each classN, index in className
+                                                        - let subjectUrl = "/parent/class/" + classN.name + "/subjects"
+                                                        if staff
+                                                            each staff, index in staff
+                                                                - let staffUrl = "/parent/new-staff/" + staff._id
+                                                        
+                                                        
+                                                        tr
+                                                            td #{classN.name}
+                                                            td #[a(href=subjectUrl class="main-link") View]
+                                                            td #[a(href=staffUrl class="main-link") View]
+                                                            
+
+        include includes/footer.pug

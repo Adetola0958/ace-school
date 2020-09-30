@@ -1,0 +1,59 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        .row.justify-content-center
+                            .col-md-11
+                                div(class="card")
+                                    div(class="card-header")
+                                        p(class="card-title") Create Note
+                                    div(class="card-body")
+                                        p #{message}
+                                        form(action="", method="post" class="form-field")
+                                            .row
+                                                .col-md-3.col-sm-6.mt-2
+                                                    label(class="label") Week
+                                                    input(type="number", name="week" class="form-control")
+                                                .col-md-3.col-sm-6.mt-2
+                                                    label(class="label") Subject
+                                                    select(name="subject" class="form-control custom-select")
+                                                        option(value="" selected disabled="disabled") ------
+                                                        each st in staff.class.subject 
+                                                            option(value=st) #{st}
+                                                .col-md-3.col-sm-6.mt-2
+                                                    label(class="label") Class
+                                                    select(name="className" class="form-control custom-select")
+                                                        option(value="" selected disabled="disabled") ------
+                                                        each ct in staff.class.className 
+                                                            option(value=ct) #{ct}
+                                                .col-md-3.col-sm-6.mt-2
+                                                    label(class="label") Date
+                                                    input(type="date", name="date" class="form-control")
+                                                .col-md-12.mt-2
+                                                    label(class="label") Topic
+                                                    input(type="text", name="topic" class="form-control")
+                                                .col-md-12.mt-2
+                                                    label(class="label") Material Used
+                                                    input(type="text", name="materials" class="form-control")
+                                                .col-md-12.mt-2
+                                                    label(class="label") Content
+                                                    input(type="text", name="contentTopic" class="form-control mb-3" placeholder="Content Topic")
+                                                    textarea(name="contentDetail", cols="30", rows="10" class="form-control" placeholder="Notes")
+                                                .col-md-12.mt-2
+                                                    label(class="label") Presentation
+                                                    textarea(name="presentation", cols="30", rows="10" class="form-control")
+                                                .col-md-12.mt-2
+                                                    label(class="label") Evaluation
+                                                    textarea(name="evaluation", cols="30", rows="10" class="form-control")
+                                                .col-md-12.mt-2
+                                                    label(class="label") Conclusion
+                                                    input(type="text", name="conclusion" class="form-control")
+                                                .col-md-6
+                                                    button(type="submit").btn.main-btn.mt-3.pl-5.pr-5 Add Note
+        include includes/footer.pug

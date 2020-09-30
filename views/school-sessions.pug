@@ -1,0 +1,57 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        div(class="d-flex justify-content-between")
+                            h5 Sessions
+                            p #[a(href="#" data-toggle="modal" data-target="#add-session" class="ace-btn") New Session #[i(class="fa fa-plus ml-1")]]
+                            div(id="add-session" class="modal fade")
+                                div(class="modal-dialog" role="document")
+                                    div(class="modal-content")
+                                        div(class="modal-header")
+                                            h4(class="modal-title") Add a Session
+                                            button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                                                span(aria-hidden="true") &times;
+                                        div(class="modal-body")
+                                            form(method="POST")
+                                                label(class="label") Name: 
+                                                input(type="text" class="form-control mb-2" name="name" placeholder="(E.G : 2019/2020 Session)")
+                                                div(class="text-center")
+                                                    button(type="submit" class="btn main-btn") Create
+
+                        .row.justify-content-center
+                            .col-md-10
+                                if session.length > 0
+                                    div(class="table-responsive card" style="overflow-x:auto;")
+                                        table.table.table-bordered 
+                                            thead 
+                                                tr 
+                                                    th S/N
+                                                    th Name
+                                                    th Current Session
+                                                    th Add/View Term
+
+                                            tbody 
+                                                each sess, index in session
+                                                    - let name = sess.name
+                                                    - let viewUrl = "/school/session/" + sess._id
+                                                    tr
+                                                        td #{index + 1}  
+                                                        td #{name}
+                                                        if sess.current
+                                                            td Yes
+                                                        else
+                                                            - let currentUrl = "/school/session/current/" + sess._id
+                                                            td #[a(href=currentUrl class="ace-btn") Make Current]
+                                                        td #[a(href=viewUrl class="main-link") View]
+                                else
+                                    .card
+                                        p.text-small No session has been created.
+        
+        include includes/footer.pug

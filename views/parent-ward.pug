@@ -1,0 +1,49 @@
+include includes/header.pug 
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                         div(class="container")
+                            div(class="d-flex justify-content-between")
+                                h5 Child(ren)
+                            
+                            .row.justify-content-center
+                                .col-md-10
+                                    if success
+                                        if success.length != 0
+                                            .alert.alert-success.alert-dismissible.fade-in(role="alert")
+                                                button.close(type="button" data-dismiss="alert" aria-label="close")
+                                                    span(aria-hidden="true") ×
+                                                span #{success}
+                                    
+                                    if parent
+                                        div(class="table-responsive card")
+                                            table(class="table table-bordered" id="dataTable")
+                                                thead.thead-light 
+                                                    tr 
+                                                        th S/N 
+                                                        th Full Name
+                                                        th Class
+                                                        th Activity
+                                                tbody 
+                                                    each students, index in student
+                                                        - let name = `${student.firstName} ${student.lastName}`
+                                                        - let classN = `${studentClass.name}`
+                                                        - let profileUrl = "/parent/new-student/" + student._id
+                                                        - let classUrl = "/parent/class/" + classN
+                                                        - let assUrl = "/parent/assignements/" + student._id
+                                                        - i++ 
+                                                        tr 
+                                                            td #{index + 1} 
+                                                            td #{name}
+                                                            td #[a(href=classUrl class="main-link") #{classN}]
+                                                            td 
+                                                                p #[a(href=profileUrl class="main-link") Check Profile]
+                                                                p #[a(href=assUrl class="main-link") Assignments]
+                                                                p #[a(href="#" class="main-link") Report Cards]
+                                                                p #[a(href="#" class="main-link") Time Tables]

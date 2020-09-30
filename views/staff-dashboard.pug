@@ -1,0 +1,52 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h6.mb-3 Profile
+                        div(class="row justify-content-center")
+                            div(class="col-md-10")
+                                div(class="row")
+                                    div(class="col-md-5")
+                                        div(class="card")
+                                            if staff.profilePhoto
+                                                - let imageUrl = "/uploads/schools/" + code + "/staffs/" + staff.profilePhoto
+                                                img(src=imageUrl alt="" width="100%" height="300px")
+                                            else
+                                                img(src="/images/default-avatar.png" alt="" width="100%" height="300px")
+                                            
+                                    div(class="col-md-7")
+                                        div(class="card-box")
+                                            .row
+                                                .col-3
+                                                    label(for="ID" class="label") Staff ID:
+                                                .col-9
+                                                    input(type="text" value= staff.staffID class="profile-form mb-4" readonly)
+                                                if staff.role == "Teacher"
+                                                    .col-3
+                                                        label(for="class" class="label") Class Taken:
+                                                    .col-9
+                                                        input(type="text" value= staff.class.className class="profile-form mb-4" readonly)
+                                                .col-3
+                                                    label(for="firstname" class="label") First Name:
+                                                .col-9
+                                                    input(type="text" value= staff.firstName class="profile-form mb-4" name="firstName" readonly)
+                                                .col-3
+                                                    label(for="lastname" class="label") Last Name:
+                                                .col-9
+                                                    input(type="text" value= staff.lastName class="profile-form mb-4" name="lastName" readonly)
+                                                .col-3
+                                                    label(for="pthername" class="label") Email:
+                                                .col-9
+                                                    input(type="text" value= staff.email class="profile-form mb-4" name="otherName" readonly)
+                                                .col-3
+                                                    label(for="gender" class="label") Role:
+                                                .col-9
+                                                    input(type="text" value= staff.role class="profile-form mb-4" name="gender" readonly)
+
+        include includes/footer.pug

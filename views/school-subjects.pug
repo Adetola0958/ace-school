@@ -1,0 +1,39 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h5 Subjects
+                        .row
+                            .col-md-6
+                                if success
+                                    if success.length != 0
+                                        .alert.alert-success.alert-dismissible.fade-in(role="alert")
+                                            button.close(type="button" data-dismiss="alert" aria-label="close")
+                                                span(aria-hidden="true") ×
+                                            span #{success}
+                        div(class="card")
+                            p You can add more subjects or remove any one from this list...
+                            div(class="row")
+                                each subject in subjects.subjects
+                                    - let deleteUrl = "/school/subjects/" + subject
+                                    div(class="col-lg-3 col-sm-4 col-6 mb-3")
+                                        div(class="box")
+                                            p(class="small-text float-left") #{subject}
+                                            a(class="float-right" href=deleteUrl) #[i(class="fa fa-trash")] 
+                                            p(class="clearfix")
+                            hr
+                            div(class="row pt-3 justify-content-center")
+                                .col-md-6.form-field
+                                    form(action="", method="post")
+                                        label(class="label") Add a Subject :
+                                        input(type="text" name="subject" class="form-control mb-3")
+                                        .text-center
+                                            button(type="submit" class="main-btn") Add
+
+        include includes/footer.pug

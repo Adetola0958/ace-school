@@ -1,0 +1,76 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        div(class="d-flex justify-content-between")
+                            h5 Exams
+                            p #[a(href="#" data-toggle="modal" data-target="#add-exam" class="ace-btn") New Exam #[i(class="fa fa-plus ml-1")]]
+                            div(id="add-exam" class="modal fade")
+                                div(class="modal-dialog" role="document")
+                                    div(class="modal-content")
+                                        div(class="modal-header")
+                                            h4(class="modal-title") Add an Exam
+                                            button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                                                span(aria-hidden="true") &times;
+                                        div(class="modal-body")
+                                            form(method="POST")
+                                                label(class="label") Session:
+                                                select(name="session" class="form-control custom-select session_select mb-2")
+                                                    option(value="" selected disabled="disabled") ------------
+                                                    option(value=session._id id=session._id) #{session.name}
+                                                label(class="label") Term:
+                                                select(name="term" class="form-control custom-select term-select")
+                                                p.err-msg
+                                                label(class="label") Exam Name: 
+                                                input(type="text" class="form-control mb-2" name="name" placeholder="(E.G : JAMB)")
+                                                label(class="label") Start Date: 
+                                                input(type="date" class="form-control mb-2" name="startDate" placeholder="Start Date")
+                                                label(class="label") End Date:
+                                                input(type="date" class="form-control mb-2" name="endDate" placeholder="End Date")
+                                                div(class="text-center")
+                                                    button(type="submit" class="btn main-btn") Create
+
+                        .row.justify-content-center
+                            .col-md-12
+                                if noExam
+                                    .card
+                                        p.text-small #{noExam}
+                                if exams
+                                    div(class="table-responsive card" style="overflow-x:auto;")
+                                        table.table.table-bordered 
+                                            thead 
+                                                tr 
+                                                    th Exam Code
+                                                    th Session
+                                                    th Term
+                                                    th Exam Name
+                                                    th Start Date
+                                                    th Time Table
+                                                    th Questions
+                                            tbody 
+                                                each exam in exams
+                                                    - let code = exam.examCode
+                                                    - let session = exam.session
+                                                    - let term = exam.term
+                                                    - let name = exam.name
+                                                    - let startDateYear = exam.startDate.getFullYear()
+                                                    - let startDateMonth = exam.startDate.getMonth() + 1
+                                                    - let startDateDay = exam.startDate.getDate()
+                                                    - let questionsUrl = "/school/exam/" + exam.examCode + "/questions" 
+                                                    tr
+                                                        td #{code}
+                                                        td #{sessionName[session]}  
+                                                        td #{termName[term]}
+                                                        td #{name}
+                                                        td #{startDateDay}/#{startDateMonth}/#{startDateYear}
+                                                        td #[a(href="#" class="main-link") View]
+                                                        td #[a(href=questionsUrl class="main-link") View]
+        
+        script(src="/javascripts/populate.js" type="module")
+        include includes/footer.pug

@@ -1,0 +1,23 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        .row.justify-content-center
+                            .col-md-10
+                                .card
+                                    if session.length > 0
+                                        h6(class="mb-4") Select a Session :
+                                        each sess in session
+                                            - let examUrl = "/school/lesson-notes/" + sess._id
+                                            a(href=examUrl class="main-link") #{sess.name}
+                                            hr
+                                    else
+                                        p.text-small No session has been created.
+
+        include includes/footer.pug

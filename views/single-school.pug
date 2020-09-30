@@ -1,0 +1,56 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h4.mb-3 #{school.schoolName}
+                        div(class="row")
+                            div(class="col-md-6 card ml-3")
+                                div(class="custom-border")
+                                    if school.schoolCode
+                                        label(class="label") School ID :
+                                        input(type="text" value=school.schoolCode class="form-control mb-3" readonly)
+                                    else
+                                        label(class="label") School ID :
+                                        input(type="text" value="Not assigned yet" class="form-control mb-3" readonly)
+                                    label(class="label") School Email :
+                                    input(type="text" value=school.schoolEmail class="form-control mb-3" readonly)
+                                    label(class="label") Mobile Number :
+                                    input(type="text" value=school.schoolNumber class="form-control mb-3" readonly)
+                                    label(class="label") Address :
+                                    - let address = school.address + ", " + school.state + ", " + school.country
+                                    input(type="text" value=address class="form-control mb-3" readonly)
+                                    if school.verified
+                                        label(class="label") Verified Email :
+                                        input(type="text" value="Yes" class="form-control mb-3" readonly)
+                                    else
+                                        label(class="label") Verified Email :
+                                        input(type="text" value="No" class="form-control mb-3" readonly)
+                                    if !school.approved
+                                        a(href="#" class="main-btn" data-toggle="modal" data-target="#approveModal") Approve Account
+
+                                    div(class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true")
+                                        div(class="modal-dialog" role="document")
+                                            div(class="modal-content")
+                                                div(class="modal-header") Are you Sure?
+                                                    button(type="button" class="close" data-dismiss="modal" aria-label="Close") ×
+                                                div(class="modal-body") 
+                                                    p Clicking on Yes will enable the School to login with registered details.
+                                                    - let approveUrl = "/admin/school/" + school._id + "/approve"
+                                                div(class="modal-footer")
+                                                    a(href=approveUrl class="ace-btn mr-2") Yes
+                                                    a(href="#" class="cancel-btn" data-dismiss="modal" aria-label="Close") No
+
+                                if success
+                                    if success.length != 0
+                                        .alert.alert-success.alert-dismissible.fade-in(role="alert")
+                                            button.close(type="button" data-dismiss="alert" aria-label="close")
+                                                span(aria-hidden="true") ×
+                                            span #{success}
+
+                include includes/footer.pug

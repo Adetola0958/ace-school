@@ -1,0 +1,76 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                         div(class="container")
+                            h5 Add a new Staff
+                            p(class="font-italic") #[strong Note :] The Last name of the staff will be the default password in Capslock. Staff ID will be automatically generated.
+                            .row
+                                .col-6
+                                    if error
+                                        if error.length != 0
+                                            .alert.alert-danger.alert-dismissible.fade-in(role="alert")
+                                                button.close(type="button" data-dismiss="alert" aria-label="close")
+                                                    span(aria-hidden="true") ×
+                                                span #{error}
+                            .row.justify-content-center
+                                .col-md-10.card
+                                    .form-field
+                                        form(method="POST")
+                                            div(class="row ")
+                                                div(class="col-md-4")
+                                                    label(class="label") First Name :
+                                                    input(type="text" class="form-control mb-3" name="firstName")
+                                                div(class="col-md-4")
+                                                    label(class="label") Last Name :
+                                                    input(type="text" class="form-control mb-3" name="lastName")
+                                                div(class="col-md-4")
+                                                    label(class="label") Email :
+                                                    input(type="email" class="form-control mb-3" name="email")
+                                                div(class="col-md-4")
+                                                    label(class="label") Mobile Number :
+                                                    input(type="tel" class="form-control mb-3" name="number")
+                                                div(class="col-md-4")
+                                                    label(class="label") Gender :
+                                                    select(class="form-control custom-select mb-3" name="gender")
+                                                        option(value="" selected disabled="disabled") ---------
+                                                        option(value="male") Male
+                                                        option(value="female") Female
+                                                div(class="col-md-4")
+                                                    label(class="label") Role :
+                                                    select(class="role form-control custom-select mb-3" name="role")
+                                                        option(value="" selected disabled="disabled") ---------
+                                                        option(value="Teacher") Teacher
+                                                        option(value="Other") Other
+                                                div(class="col-lg-6")
+                                                    label(for="classes" class="label") Class Taken :
+                                                    select(class="classes form-control mb-3 multiple-select" name="classes" multiple size="3")
+                                                        each classN in className
+                                                            option(value=classN.name) #{classN.name}
+                                                div(class="col-lg-6")
+                                                    label(for="subjects" class="label") Subjects Taken :
+                                                    select(class="subjects form-control mb-3 multiple-select" name="subjects" multiple size="3")
+                                                        each subject in subjects.subjects
+                                                            option(value=subject) #{subject}
+
+                                                div(class="col-lg-6")
+                                                    label(for="subjects" class="label") Class teacher :
+                                                    select(class="form-control mb-3 custom-select" name="classHead" id="classHead")
+                                                        option(value="" selected disabled="disabled") ---------
+                                                        each classN in className
+                                                            option(value=classN._id) #{classN.name}
+                                                    p.err-msg
+                                                
+                                            div(class="text-center")
+                                                button(type="submit" id="submit" class="btn main-btn") Continue
+                                                
+
+                    
+        script(src="/javascripts/confirm.js" type="module")
+        include includes/footer.pug

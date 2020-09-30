@@ -1,0 +1,62 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h5 Mark Attendance [#[span(class="term-class") #{term.name}]]
+                        .row.justify-content-center
+                            .col-md-10.card
+                                .row
+                                    .col-sm-6.mb-3
+                                        label(class="label") Select Date
+                                        input(type="date", name="date" class="form-control" id="dateData")
+                                    .col-sm-6
+                                        label(class="label") Select Week
+                                        select(id="weekData" class="form-control custom-select")
+                                            option(value="" disabled="disabled" selected) ------------
+                                            option(value="1") Week 1
+                                            option(value="2") Week 2
+                                            option(value="3") Week 3
+                                            option(value="4") Week 4
+                                            option(value="5") Week 5
+                                            option(value="6") Week 6
+                                            option(value="7") Week 7
+                                            option(value="8") Week 8
+                                            option(value="9") Week 9
+                                            option(value="10") Week 10
+                                            option(value="11") Week 11
+                                            option(value="12") Week 12
+                                            option(value="13") Week 13
+                                            option(value="14") Week 14
+                                hr
+                                if noStudent
+                                    .shadow.p-4
+                                        h4 #{noStudent}
+                                if students
+                                    div(class="table-responsive card")
+                                        table(class="table table-bordered")
+                                            thead.thead-light
+                                                tr
+                                                    th Full Name
+                                                    th Mark
+                                                
+                                            tbody
+                                                each student in students
+                                                    tr
+                                                        td #{student.firstName} #{student.lastName} #{student.otherName}
+                                                        td #[input(type="checkbox", class="check" id=student._id)] #[label(for="present" class="ml-1") Present]
+                                                        
+                                        .row
+                                            .col-sm-3
+                                                button(type="button" href="#" class="ace-btn" id="updateAll") Mark All  
+                                            .col-sm-12
+                                                p.mt-3.err-msg 
+                                                          
+
+        script(src="/javascripts/attendance.js" type="module")
+        include includes/footer.pug 

@@ -1,0 +1,30 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h4 Step 2
+                        .row.justify-content-center
+                            .col-md-10.card
+                                h6 Upload an Image for #{parent.name}
+                                form(method='POST' enctype="multipart/form-data")
+                                    div(class="text-center mt-2")
+                                        label(class="btn-file") #[i(class="fa fa-camera pr-2")] 
+                                            input(type="file" accept="image/*" name='picture' id='picture' required)
+                                    div(class="text-center mt-2")
+                                        input(type="submit" class="ace-btn mr-4" value="Complete")
+                                        - let skipUrl = "/school/parent/" + parent._id
+                                        a(href=skipUrl class="cancel-btn") Skip
+                                div(class="preview")
+                                    div(class="boxImage" id="displayImage")
+                                        p(class="hide mt-5") Preview 
+                                    div(class="removePicture")
+                                        a(href="#" id="removeImage") #[i(class="fa fa-times")]
+
+        script(src="/javascripts/handleImage.js")
+        include includes/footer.pug

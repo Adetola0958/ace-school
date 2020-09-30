@@ -1,0 +1,20 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/style.css')
+    body
+        div(class="container-fluid")
+            div(class="row")
+                div(class="col-lg-6 chelcin_bg")
+                div(class="col-lg-6")
+                    .row
+                        div(class="col-2")
+                        div(class="col-8")
+                            div(class="form_bg")
+                                div(class="form_container")
+                                    div(class="form_content2")
+                                        h4 You are almost there, #{schoolAdmin.schoolName}!
+                                        p Please verify your email and wait for approval.  Your details will be proccessed.
+                                        
+                                        div(class="d-flex justify-content-between mb-5 mt-4")
+                                            a(href="/" class="signup_btn") Home Page
+                                            a(href="/school" class="signup_btn") Log In

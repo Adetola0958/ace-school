@@ -1,0 +1,77 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h5 Lesson Note
+                        div(class="card")
+                            div(class="card-body format")
+                                .row
+                                    .col-sm-12.text-center.pb-2
+                                        if singleLessonNote.status == 'Pending'
+                                            img(src="/images/pending.webp", alt="" width="15%")
+                                        else
+                                            img(src="/images/approved.jpeg", alt="" width="15%")
+                                    .col-sm-2.text-lg-right
+                                        p.font-weight-bold Staff's Name: 
+                                    .col-sm-10
+                                        p #{staff.firstName.toUpperCase()} #{staff.lastName.toUpperCase()}
+                                    
+                                    .col-sm-2.text-lg-right
+                                        p.font-weight-bold Class : 
+                                    .col-sm-10
+                                        p #{staff.class.className}
+                                    .col-sm-2.text-lg-right
+                                        p.font-weight-bold Session : 
+                                    .col-sm-10
+                                        p #{singleLessonNote.session}
+                                    .col-sm-2.text-lg-right
+                                        p.font-weight-bold Term : 
+                                    .col-sm-10
+                                        p #{singleLessonNote.term}
+                                    .col-sm-2.text-lg-right
+                                        p.font-weight-bold Date : 
+                                    .col-sm-10
+                                        -let date = singleLessonNote.date.getDay() + '/' + (singleLessonNote.date.getMonth() + 1) + '/' + singleLessonNote.date.getFullYear()
+                                        p #{date}
+                                    .col-sm-2.text-lg-right
+                                        p.font-weight-bold Week : 
+                                    .col-sm-10
+                                        p #{singleLessonNote.week}
+                                    .col-sm-2.text-lg-right
+                                        p.font-weight-bold Subject : 
+                                    .col-sm-10
+                                        p #{singleLessonNote.subject}
+                                    .col-sm-2.text-lg-right
+                                        p.font-weight-bold Topic : 
+                                    .col-sm-10
+                                        p #{singleLessonNote.topic}
+                                    .col-sm-2.text-lg-right
+                                        p.font-weight-bold Materials Used : 
+                                    .col-sm-10
+                                        p #{singleLessonNote.materials}
+                                    .col-sm-2.text-lg-right
+                                        p.font-weight-bold Content : 
+                                    .col-sm-10
+                                        p.text-danger.font-weight-bold #{singleLessonNote.content.contentTopic.toUpperCase()}
+                                        p #{singleLessonNote.content.contentDetail}
+                                    .col-sm-2.text-lg-right
+                                        p.font-weight-bold Presentation : 
+                                    .col-sm-10
+                                        p #{singleLessonNote.presentation}
+                                    .col-sm-2.text-lg-right
+                                        p.font-weight-bold Evaluation : 
+                                    .col-sm-10
+                                        p #{singleLessonNote.evaluation}
+                                    .col-sm-2.text-lg-right
+                                        p.font-weight-bold Conclusion : 
+                                    .col-sm-10
+                                        p #{singleLessonNote.conclusion}
+                                    .col-sm-12.text-center.mt-3
+                                        button.ace-btn.pl-5.pr-5 Print
+        include includes/footer.pug                      

@@ -1,0 +1,49 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                         div(class="container")
+                            div(class="d-flex justify-content-between")
+                                h5 Parents
+                                p #[a(href="/school/parent/new" class="ace-btn") New Parent #[i(class="fa fa-plus ml-1")]]
+                            
+                            .row.justify-content-center
+                                .col-md-10
+                                    if success
+                                        if success.length != 0
+                                            .alert.alert-success.alert-dismissible.fade-in(role="alert")
+                                                button.close(type="button" data-dismiss="alert" aria-label="close")
+                                                    span(aria-hidden="true") ×
+                                                span #{success}
+                                    
+                                    if noParent
+                                        .card
+                                            p.text-small #{noParent}
+                                    if parents
+                                        div(class="table-responsive card")
+                                            table(class="table table-bordered" id="dataTable")
+                                                thead.thead-light 
+                                                    tr 
+                                                        th S/N 
+                                                        th Parent ID
+                                                        th Full Name
+                                                        th View
+                                                tbody 
+                                                    each parent , index in parents
+                                                        - let id = parent.parentID
+                                                        - let name = `${parent.name}`
+                                                        - let parentUrl = "/school/parent/" + parent._id
+                                                        - i++ 
+                                                        tr 
+                                                            td #{index + 1} 
+                                                            td #{id}
+                                                            td #{name}
+                                                            td #[a(href=parentUrl class="main-link") Check Profile]
+
+        include includes/footer.pug

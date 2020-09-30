@@ -1,0 +1,54 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        .d-flex.justify-content-between
+                            h6 Unapproved Lesson Notes
+                            a(href=`/school/lesson-notes/${session._id}/${term.name}/all` class="ace-btn") Approved Notes
+                        .row.justify-content-center.mt-4
+                            .col-md-11
+                                .card
+                                    .card-body
+                                        if lessonNotes
+                                            div(class="table-responsive card")
+                                                table(class="table table-bordered" id="dataTable")
+                                                    thead.thead-light
+                                                        tr
+                                                            th Staff
+                                                            th Subject
+                                                            th Class
+                                                            th Week
+                                                            th View
+                                                            th Approve
+                                                    tbody
+                                                        each lessonNote in lessonNotes
+                                                            -let singleLessonNote = '/school/lesson-notes/' + session._id + '/' + term.name + '/' + lessonNote._id
+                                                            -let approveUrl = '/school/lesson-notes/' + session._id + '/' + term.name + '/' + lessonNote._id + '/approve'
+                                                            tr
+                                                                td #{staffName[lessonNote.staff]}
+                                                                td #{lessonNote.subject}
+                                                                td #{lessonNote.className}
+                                                                td #{lessonNote.week}
+                                                                td #[a(href=singleLessonNote class="main-link") view]
+                                                                td #[a(href="#" class="ace-btn" data-toggle="modal" data-target="#approveModal") #[i(class="fa fa-handshake-o")]]
+                                                                div(class="modal fade" id="approveModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+                                                                    div(class="modal-dialog" role="document")
+                                                                        div(class="modal-content")
+                                                                            div(class="modal-header")
+                                                                                h5(class="modal-title" id="exampleModalLabel") Are you sure?
+                                                                                button(class="close" type="button" data-dismiss="modal" aria-label="Close")
+                                                                                    span(aria-hidden="true") ×
+                                                                            div(class="modal-body") Are you sure you want to approve this note?
+                                                                            div(class="modal-footer")
+                                                                                a(class="ace-btn mr-3" href=approveUrl) Ok
+                                                                                button(class="cancel-btn" type="button" data-dismiss="modal") Cancel
+
+                                        else
+                                            p.text-small Unapproved lesson notes will appear here if there's any.
+        include includes/footer.pug

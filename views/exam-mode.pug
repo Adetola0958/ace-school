@@ -1,0 +1,74 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/exam.css')
+    body
+        div(id="wrapper")
+            nav(class="navbar")
+                div(class="container")
+                    a(class="navbar-brand") Ace School
+                    span(class="className" id=course.className)
+                    span(class="courseName" id=course.courseName)
+                    span(class="endTime" id=endTime) 
+                    span(class="currentTime" , id=currentTime)
+                    span(class="time-box" id="remainingTime") 00:00:00
+            div(class="exam-section")
+                .container.mt-5
+                    if noQuestion
+                        p #{noQuestion}
+                    if currentQuestion
+                        .exam-box
+                            - let i = 1 
+                            p(class="float-left") #[strong(class="currentQuestion" id=currentQuestion.questionNumber) Question #{currentQuestion.questionNumber} ] 
+                            p(class="float-right mr-5 font-weight-bold") Marks : #{currentQuestion.mark} 
+                            div(class="clearfix")
+                            p(class="mt-2 question-para" id=currentQuestion._id) #{currentQuestion.mainQuestion}
+                            if currentQuestion.image
+                                div(class="mt-1 text-center")
+                                    - let imageUrl = "/uploads/schools/" + code + "/" + "/exam-" + exam.examCode + "/" + course.courseName + "-" + course.className + "/" + currentQuestion.image
+                                    p #[img(src=imageUrl height="150px" width="300px")]
+                            div(class="radio-box")
+                                input(type="radio" class="" data-id=currentQuestion._id name=currentQuestion.question value=currentQuestion.options.optionA)
+                                label(for="#optionA" class="form-check-label ml-2") #{currentQuestion.options.optionA}
+                            div(class="radio-box")
+                                input(type="radio" class="" data-id=currentQuestion._id name=currentQuestion.question value=currentQuestion.options.optionB)
+                                label(for="#optionA" class="form-check-label ml-2") #{currentQuestion.options.optionB}
+                            div(class="radio-box")
+                                input(type="radio" class="" data-id=currentQuestion._id name=currentQuestion.question value=currentQuestion.options.optionC)
+                                label(for="#optionA" class="form-check-label ml-2") #{currentQuestion.options.optionC}
+                            div(class="radio-box")
+                                input(type="radio" class="" data-id=currentQuestion._id name=currentQuestion.question value=currentQuestion.options.optionD)
+                                label(for="#optionA" class="form-check-label ml-2") #{currentQuestion.options.optionD}
+
+                        p
+                            - let prevUrl = `/student/exam/${exam.name}/courses/${course.courseName}/running?question=${currentQuestion.questionNumber - 1}`
+                            - let nextUrl = `/student/exam/${exam.name}/courses/${course.courseName}/running?question=${currentQuestion.questionNumber + 1}`
+                            if currentQuestion.questionNumber != 1
+                                a(class="ace-btn mr-3 mb-2" href=prevUrl) Prev
+                            if currentQuestion.questionNumber != questions.question.length
+                                a(class="ace-btn mr-3 mb-2" href=nextUrl) Next 
+
+                        div.mb-4 
+                            each question in questions.question 
+                                - let questionNumber = question.course
+                                - let quesNumber = i++
+                                - let url = `/student/exam/${exam.name}/courses/${course.courseName}/running?question=${quesNumber}`
+                                a(href=url class="btn btn-secondary display-all btn-sm mr-2" id=question._id) #{quesNumber} 
+                        div(class="end-quiz float-right mb-5")
+                            a(href="#" class="red-btn" data-toggle="modal" data-target="#end-exam") End Test
+                    
+                        div(id="end-exam" class="modal fade")
+                            div(class="modal-dialog" role="document")
+                                div(class="modal-content")
+                                    div(class="modal-header")
+                                        h4(class="modal-title") Are you sure you want to submit?
+                                        button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                                            span(aria-hidden="true") &times;
+                                    div(class="modal-body")
+                                        p #[span(class="fa fa-info-circle") ] There's no going back once you click on submit.
+                                        a(href="#" class="red-btn mr-3" id="quit") Submit
+                                        a(href="#" class="red-btn" data-dismiss="modal" aria-label="Close") Cancel
+
+            
+
+        script(src="/javascripts/examscript.js" type="module")
+        include includes/footer.pug

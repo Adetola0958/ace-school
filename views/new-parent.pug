@@ -1,0 +1,61 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                         div(class="container")
+                            h5 Add a New Parent
+                            p(class="font-italic") #[strong Note :] The Email of the Parent will be the default password. Parent ID will be automatically generated.
+                            .row
+                                .col-6
+                                    if error
+                                        if error.length != 0
+                                            .alert.alert-danger.alert-dismissible.fade-in(role="alert")
+                                                button.close(type="button" data-dismiss="alert" aria-label="close")
+                                                    span(aria-hidden="true") ×
+                                                span #{error}
+                            .row.justify-content-center
+                                .col-md-10.card
+                                    .form-field
+                                        form(method="POST")
+                                            div(class="row ")
+                                                div(class="col-md-4")
+                                                    label(class="label") Name :
+                                                    input(type="text" class="form-control mb-3" name="name")
+                                                div(class="col-md-4")
+                                                    label(class="label") Email :
+                                                    input(type="email" class="form-control mb-3" name="email")
+                                                div(class="col-md-4")
+                                                    label(class="label") Mobile Number :
+                                                    input(type="tel" class="form-control mb-3" name="number")
+                                                div(class="col-md-4")
+                                                    label(class="label") Gender :
+                                                    select(class="form-control custom-select mb-3" name="gender")
+                                                        option(value="" selected disabled="disabled") ---------
+                                                        option(value="male") Male
+                                                        option(value="female") Female
+                                                div(class="col-md-4")
+                                                    label(class="label") Role :
+                                                    select(class="role form-control custom-select mb-3" name="role")
+                                                        option(value="" selected disabled="disabled") ---------
+                                                        option(value="father") Father
+                                                        option(value="mother") Mother
+                                                div(class="col-md-4")
+                                                    label(for="wards" class="label") Child(ren) :
+                                                    select(class="form-control mb-3 multiple-select" name="children" id="confirmParent" multiple size="3")
+                                                        each students in student
+                                                            option(value=students._id) #{students.firstName} #{students.lastName}
+                                                    p.err-msg
+                                                
+                                            div(class="text-center")
+                                                button(type="submit" id="submit" class="btn main-btn") Continue
+                                                
+
+                    
+        //-script(src="/javascripts/confirm.js" type="module")
+        include includes/footer.pug

@@ -1,0 +1,21 @@
+include includes/header.pug 
+block content
+    link(rel='stylesheet' , href='/stylesheets/exam.css')
+    body(class="color-background")
+        div(class="container mt-5")
+            .row.justify-content-center
+                .col-md-8
+                    div(class="success-box")
+                        div(class="text-center")
+                            span(class="fa fa-handshake-o")
+                            //- p #[b Congratulations, #{student.firstName} #{student.lastName}!]
+                            p #[b Congratulations, Kendrick Lamar!]
+                        p Your Examination has been succesfully saved.
+                        p If you can spare us few seconds of your time, kindly rate your experience below:
+                        a(href="#" class="review-link") #[p Excellent : #[span(class="fa fa-star")] #[span(class="fa fa-star")] #[span(class="fa fa-star")] #[span(class="fa fa-star")] #[span(class="fa fa-star")]]
+                        a(href="#" class="review-link") #[p Great : #[span(class="fa fa-star")] #[span(class="fa fa-star")] #[span(class="fa fa-star")] #[span(class="fa fa-star")]]
+                        a(href="#" class="review-link") #[p Good : #[span(class="fa fa-star")] #[span(class="fa fa-star")] #[span(class="fa fa-star")]]
+                        a(href="#" class="review-link") #[p Not Bad : #[span(class="fa fa-star")] #[span(class="fa fa-star")]]
+                        a(href="#" class="review-link") #[p Poor : #[span(class="fa fa-star")]]
+                        .text-center
+                            a(href="/student" class="ace-btn") Login Page

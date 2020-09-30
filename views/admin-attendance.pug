@@ -1,0 +1,23 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        .row.justify-content-center
+                            .col-md-10
+                                .card
+                                    h6(class="mb-4") Select the class attendance you want to see.
+                                    .row
+                                        each course in classchool
+                                            - let classUrl = "/school/attendance/" + session._id + '/' + term.name + '/' + course._id
+                                            .col-md-4.mb-3
+                                                a(href=classUrl)
+                                                    div(class="box-field")
+                                                        span #{course.name}
+
+        include includes/footer.pug

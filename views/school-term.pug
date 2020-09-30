@@ -1,0 +1,63 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        div(class="d-flex justify-content-between")
+                            h5 #{session.name}
+                            p #[a(href="#" data-toggle="modal" data-target="#add-term" class="ace-btn") New Term #[i(class="fa fa-plus ml-1")]]
+                            div(id="add-term" class="modal fade")
+                                div(class="modal-dialog" role="document")
+                                    div(class="modal-content")
+                                        div(class="modal-header")
+                                            h4(class="modal-title") Add a Term
+                                            button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                                                span(aria-hidden="true") &times;
+                                        div(class="modal-body")
+                                            form(method="POST")
+                                                label(class="label") Name: 
+                                                input(type="text" class="form-control mb-2" name="name" placeholder="(E.G : First Term)")
+                                                label(class="label") Start: 
+                                                input(type="date" class="form-control mb-2" name="startDate" placeholder="Start Date")
+                                                label(class="label") End:
+                                                input(type="date" class="form-control mb-2" name="endDate" placeholder="End Date")
+                                                div(class="text-center")
+                                                    button(type="submit" class="btn main-btn") Create
+
+                        .row.justify-content-center
+                            .col-md-10
+                                if term.length > 0
+                                    div(class="table-responsive card" style="overflow-x:auto;")
+                                        table.table.table-bordered 
+                                            thead 
+                                                tr 
+                                                    th Name
+                                                    th Start Date
+                                                    th End Date
+                                                    th Action
+
+                                            tbody 
+                                                each sess in term
+                                                    - let name = sess.name
+                                                    - let startDateYear = sess.startDate.getFullYear()
+                                                    - let startDateMonth = sess.startDate.getMonth() + 1
+                                                    - let startDateDay = sess.startDate.getDate()
+                                                    - let endDateDay = sess.endDate.getDate()
+                                                    - let endDateMonth = sess.endDate.getMonth() + 1
+                                                    - let endDateYear = sess.endDate.getFullYear()
+                                                    - let deleteUrl = "/school/session/" + sess._id
+                                                    tr  
+                                                        td #{name}
+                                                        td #{startDateDay}/#{startDateMonth}/#{startDateYear}
+                                                        td #{endDateDay}/#{endDateMonth}/#{endDateYear}
+                                                        td #[a(href=deleteUrl class="red-btn") Delete]
+                                else
+                                    .card
+                                        p.text-small No term has been created for #{session.name} yet.
+        
+        include includes/footer.pug

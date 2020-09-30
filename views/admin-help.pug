@@ -1,0 +1,25 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h5 Help Center
+                        .card
+                            p.text-small Report an issue or recommend a feature.
+                            .row.justify-content-center
+                                .col-md-8.form-field
+                                    form(method="POST")
+                                        label(class="label") Subject:
+                                        input(type="text" class="form-control mb-3" name="subject")
+                                        label(class="label") Message:
+                                        textarea(name="message" class="form-control mb-3")
+                                        .text-center
+                                            input(type="submit" value="Report" class="main-btn")
+
+
+        include includes/footer.pug

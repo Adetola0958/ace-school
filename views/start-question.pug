@@ -1,0 +1,67 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h6.mb-3 #{courseName}, #{className}
+                        .row.justify-content-center
+                            .col-md-10.card
+                                if examQuestions
+                                    .form-field
+                                        h2.welcome-text.mb-3 #{exam.name}
+                                        p #[strong Class] : #[i #{examQuestions.className}]
+                                        p #[strong Subject] : #[i #{examQuestions.courseName}]
+                                        p #[strong Duration] : #[i #{examQuestions.duration} minutes]
+                                        p #[strong Instructions] : #[i #{examQuestions.instruction}]
+                                        - let questionsUrl = '/staff/exam/' + exam.examCode + '/courses/' + examQuestions.courseName + '/' + examQuestions.className + '/questions'
+                                        - let previewUrl = '/staff/exam/' + exam.examCode + '/courses/' + examQuestions.courseName + '/' + examQuestions.className + '/preview'
+                                        a(href=questionsUrl class="ace-btn mr-2") View Questions
+                                        a(href=previewUrl class="ace-btn mr-2") Preview
+                                        if !examQuestions.publish
+                                            a(href="#" class="ace-btn" data-toggle="modal" data-target="#publish-exam") Publish
+                                            p(class="bolded-italic mt-3") Please ensure you click on 'PUBLISH' once you finish setting your questions.
+                                        else 
+                                            P(class="mt-3") Exam has been published!
+                        
+                                        div(id="publish-exam" class="modal fade")
+                                            div(class="modal-dialog" role="document")
+                                                div(class="modal-content")
+                                                    div(class="modal-header")
+                                                        h4(class="modal-title") Are you sure?
+                                                        button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                                                            span(aria-hidden="true") &times;
+                                                    div(class="modal-body")
+                                                        p Clicking on okay means you are done with setting your questions. Make sure you cross check before clicking on Ok.
+                                                    div(class="modal-footer")
+                                                        - let publishUrl = '/staff/exam/' + exam.examCode + '/courses/' + examQuestions.courseName + '/' + examQuestions.className + '/publish'
+                                                        a(class="ace-btn" href=publishUrl) Ok
+                                                        button(class="cancel-btn" type="button" data-dismiss="modal") Cancel
+                        
+                                else
+                                    p.text-small You haven't set an exam for this yet.
+                                    .row
+                                        .col-md-3
+                                            a(href="#" class="main-btn" data-toggle="modal" data-target="#add-exam") Set your Exam
+
+                                    div(id="add-exam" class="modal fade")
+                                        div(class="modal-dialog" role="document")
+                                            div(class="modal-content")
+                                                div(class="modal-header")
+                                                    h4(class="modal-title") Add an Exam
+                                                    button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                                                        span(aria-hidden="true") &times;
+                                                div(class="modal-body")
+                                                    form(method="POST")
+                                                        label(class="label") Instructions:
+                                                        textarea(class="form-control mb-2" name="instructions" placeholder="Instructions")
+                                                        label(class="label") Duration in minutes:
+                                                        input(type="number" class="form-control mb-2" name="duration" placeholder="Duration in minutes")
+                                                        div(class="text-center")
+                                                            button(type="submit" class="btn main-btn") Create
+                
+        include includes/footer.pug

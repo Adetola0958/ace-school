@@ -1,0 +1,58 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h5 Add a new Student
+                        p(class="font-italic") #[strong Note :] The Last name of the student will be the default password in Capslock. Student ID will be automatically generated.
+                        .row.justify-content-center
+                            .col-md-10.card
+                                .form-field
+                                    form(method="POST")
+                                        div(class="row")
+                                            div(class="col-md-4")
+                                                label(class="label") First Name :
+                                                input(type="text" class="form-control mb-3" name="firstName" required)
+                                            div(class="col-md-4")
+                                                label(class="label") Last Name :
+                                                input(type="text" class="form-control mb-3" name="lastName" required)
+                                            div(class="col-md-4")
+                                                label(class="label") Other Name :
+                                                input(type="text" class="form-control mb-3" name="otherName" required)
+                                            div(class="col-md-4")
+                                                label(class="label") Gender :
+                                                select(class="form-control mb-3 custom-select" name="gender" required)
+                                                    option(value="" selected disabled="disabled") ------------
+                                                    option(value="male") Male
+                                                    option(value="female") Female
+                                            div(class="col-md-4")
+                                                label(class="label") Class :
+                                                select(class="form-control mb-3 custom-select" name="className" required)
+                                                    option(value="" selected disabled="disabled") -------------
+                                                    each classN in classchool
+                                                        option(value=classN._id) #{classN.name}
+                                            div(class="col-md-4")
+                                                label(class="label") Date of birth :
+                                                input(type="date" class="form-control mb-3" name="dob" required)
+                                            div(class="col-md-4")
+                                                label(class="label") Religion :
+                                                select(class="form-control mb-3 custom-select" name="religion")
+                                                    option(value="" selected disabled="disabled") ------------
+                                                    option(value="Christian") Christian
+                                                    option(value="Muslim") Muslim
+                                            div(class="col-md-4")
+                                                label(class="label") Blood Group :
+                                                input(type="text" class="form-control mb-3" name="blood")
+                                            div(class="col-md-4")
+                                                label(class="label") Parents' Number :
+                                                input(type="text" class="form-control mb-3" name="pNumber" required)
+                                            
+                                        div(class="text-center")
+                                            button(type="submit" class="btn main-btn") Continue
+                        
+        include includes/footer.pug

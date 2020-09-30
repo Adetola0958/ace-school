@@ -1,0 +1,52 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        h6 Exam Questions that has been published by teachers
+                        .row.justify-content-center
+                            .col-md-10
+                                if noCourse
+                                    .card
+                                        p.text-small #{noCourse}
+                                if courses
+                                    div(class="table-responsive card" style="overflow-x:auto;")
+                                        table.table.table-bordered
+                                            thead.thead-light
+                                                tr
+                                                    th Class
+                                                    th Subject
+                                                    th Questions
+                                                    th Release exam to students
+                                            tbody
+                                                each course in courses
+                                                    - let questionUrl = "/school/exam/" + exam.examCode + "/questions/" + course._id
+                                                    
+                                                    tr
+                                                        td #{course.className}
+                                                        td #{course.courseName}
+                                                        td #[a(href=questionUrl class="main-link") View]
+                                                        if !course.release
+                                                            td #[a(href="#" data-toggle="modal" data-target="#releaseModal" class="small-btn") #[i(class="fa fa-upload")]]
+                                                                div(class="modal fade" id="releaseModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+                                                                    div(class="modal-dialog" role="document")
+                                                                        div(class="modal-content")
+                                                                            div(class="modal-header")
+                                                                                h5(class="modal-title" id="exampleModalLabel") Are you sure?
+                                                                                button(class="close" type="button" data-dismiss="modal" aria-label="Close")
+                                                                                    span(aria-hidden="true") ×
+                                                                            div(class="modal-body") Students in this class will be able to write this exam.
+                                                                            div(class="modal-footer")
+                                                                                - let releaseUrl = "/school/exam/" + exam.examCode + "/questions/" + course._id + "/release"
+                                                                                a(class="red-btn" href=releaseUrl) Ok
+                                                                                button(class="cancel-btn" type="button" data-dismiss="modal") Cancel
+                                                        else
+                                                            td Exam released to students!
+                            
+
+        include includes/footer.pug

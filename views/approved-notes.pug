@@ -1,0 +1,41 @@
+include includes/header.pug
+block content
+    link(rel='stylesheet' , href='/stylesheets/dashboard.css')
+    body
+        div(id="wrapper")
+            include includes/sidenav.pug
+            div(id="content-wrapper" class="d-flex flex-column")
+                div(id="content")
+                    include includes/usernav.pug
+                    div(class="container")
+                        .d-flex.justify-content-between
+                            h6 Approved Lesson Notes
+                            a(href=`/school/lesson-notes/${session._id}/${term.name}` class="ace-btn") Unapproved Notes
+                        .row.justify-content-center.mt-4
+                            .col-md-11
+                                .card
+                                    .card-body
+                                        if lessonNotes
+                                            div(class="table-responsive card")
+                                                table(class="table table-bordered" id="dataTable")
+                                                    thead.thead-light
+                                                        tr
+                                                            th Staff
+                                                            th Subject
+                                                            th Class
+                                                            th Week
+                                                            th View
+                                                    tbody
+                                                        each lessonNote in lessonNotes
+                                                            -let singleLessonNote = '/school/lesson-notes/' + session._id + '/' + term.name + '/' + lessonNote._id
+                                                            
+                                                            tr
+                                                                td #{staffName[lessonNote.staff]}
+                                                                td #{lessonNote.subject}
+                                                                td #{lessonNote.className}
+                                                                td #{lessonNote.week}
+                                                                td #[a(href=singleLessonNote class="main-link") view]
+                                                                
+                                        else
+                                            p.text-small Unapproved lesson notes will appear here if there's any.
+        include includes/footer.pug

@@ -1,0 +1,233 @@
+block content
+    
+    nav(class="navbar navbar-expand navbar-light topbar mb-4 static-top")
+        button(id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3")
+            i(class="fa fa-bars")
+        form(class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search")
+            div(class="input-group")
+                input(type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2")
+                div(class="input-group-append")
+                    button(class="btn btn-bg" type="button")
+                        i(class="fa fa-search fa-sm")
+        ul(class="navbar-nav ml-auto")
+            li(class="nav-item dropdown no-arrow d-sm-none")
+                a(class="nav-link" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                    i(class="fa fa-search fa-fw")
+        
+                div(class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown")
+                    form(class="form-inline mr-auto w-100 navbar-search")
+                        div(class="input-group")
+                            input(type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2")
+                            div(class="input-group-append")
+                                button(class="btn" type="button")
+                                    i(class="fa fa-search fa-sm")
+            if admin
+                li(class="nav-item dropdown no-arrow mx-1")
+                    a(class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                        i(class="fa fa-bell fa-fw")
+
+                    div(class="dropdown-list dropdown-menu dropdown-menu-right animated--grow-in" aria-labelledby="alertsDropdown")
+                        h6(class="dropdown-header") Notifications
+                        a(class="dropdown-item d-flex align-items-center" href="#")
+                            div(class="mr-3")
+                                div(class="bg-africa")
+                                    i(class="fa fa-file")
+                            div
+                                div(class="small text-gray-500") Today
+                            
+                div(class="topbar-divider d-none d-sm-block")
+
+                li(class="nav-item dropdown no-arrow")
+                    a(class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                        span(class="mr-2 d-none d-lg-inline small") Admin
+                        img(class="img-profile rounded-circle" src="/images/default-avatar.png" height="40px" width="40px")
+            
+                    div(class="dropdown-menu dropdown-list2 dropdown-menu-right animated--grow-in" aria-labelledby="userDropdown")
+                        a(class="dropdown-item" href="#") Profile
+                        div(class="dropdown-divider")
+                        a(class="dropdown-item" href="#") Account Settings
+                        div(class="dropdown-divider")
+                        a(class="dropdown-item" href="#" data-toggle="modal" data-target="#AdminLogoutModal")
+                            span Logout
+                    div(class="modal fade" id="AdminLogoutModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+                        div(class="modal-dialog" role="document")
+                            div(class="modal-content")
+                                div(class="modal-header")
+                                    h5(class="modal-title" id="exampleModalLabel") Are you sure?
+                                    button(class="close" type="button" data-dismiss="modal" aria-label="Close")
+                                        span(aria-hidden="true") ×
+                                div(class="modal-body") You will be redirect to the login page.
+                                div(class="modal-footer")
+                                    a(class="ace-btn mr-3" href="/admin/logout") Ok
+                                    button(class="cancel-btn" type="button" data-dismiss="modal") Cancel
+                
+            if schoolAdmin
+                li(class="nav-item dropdown no-arrow mx-1")
+                    a(class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                        i(class="fa fa-bell fa-fw")
+
+                    div(class="dropdown-list dropdown-menu dropdown-menu-right animated--grow-in" aria-labelledby="alertsDropdown")
+                        h6(class="dropdown-header") Notifications
+                        a(class="dropdown-item d-flex align-items-center" href="#")
+                            div(class="mr-3")
+                                div(class="bg-africa")
+                                    i(class="fa fa-file")
+                            div
+                                div(class="small text-gray-500") Today
+                            
+                div(class="topbar-divider d-none d-sm-block")
+
+                li(class="nav-item dropdown no-arrow")
+                    a(class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                        span(class="mr-2 d-none d-lg-inline small") #{schoolAdmin.schoolAdmin}
+                        if schoolAdmin.logo
+                            - let imageUrl = "/uploads/schools/" + schoolAdmin.schoolCode + '/logo/' + schoolAdmin.logo
+                            img(class="img-profile rounded-circle" src=imageUrl height="40px" width="40px")
+                        else
+                            img(class="img-profile rounded-circle" src="/images/default-avatar.png" height="40px" width="40px")
+            
+                    div(class="dropdown-menu dropdown-list2 dropdown-menu-right animated--grow-in" aria-labelledby="userDropdown")
+                        a(class="dropdown-item" href="/school/profile") Profile
+                        div(class="dropdown-divider")
+                        a(class="dropdown-item" href="/school/settings") Account Settings
+                        div(class="dropdown-divider")
+                        a(class="dropdown-item" href="#" data-toggle="modal" data-target="#AdminLogoutModal")
+                            span Logout
+                    div(class="modal fade" id="AdminLogoutModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+                        div(class="modal-dialog" role="document")
+                            div(class="modal-content")
+                                div(class="modal-header")
+                                    h5(class="modal-title" id="exampleModalLabel") Are you sure?
+                                    button(class="close" type="button" data-dismiss="modal" aria-label="Close")
+                                        span(aria-hidden="true") ×
+                                div(class="modal-body") You will be redirect to the login page.
+                                div(class="modal-footer")
+                                    a(class="ace-btn mr-3" href="/school/logout") Ok
+                                    button(class="cancel-btn" type="button" data-dismiss="modal") Cancel
+            
+            if staff
+                li(class="nav-item dropdown no-arrow mx-1")
+                    a(class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                        i(class="fa fa-bell fa-fw")
+
+                    div(class="dropdown-list dropdown-menu dropdown-menu-right animated--grow-in" aria-labelledby="alertsDropdown")
+                        h6(class="dropdown-header") Notifications
+                        a(class="dropdown-item d-flex align-items-center" href="#")
+                            div(class="mr-3")
+                                div(class="bg-africa")
+                                    i(class="fa fa-file")
+                            div
+                                div(class="small text-gray-500") Today
+                            
+                div(class="topbar-divider d-none d-sm-block")
+
+                li(class="nav-item dropdown no-arrow")
+                    a(class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                        span(class="mr-2 d-none d-lg-inline small") #{staff.lastName} #{staff.firstName}
+                        if staff.profilePhoto
+                            - let imageUrl = "/uploads/schools/" + code + "/staffs/" + staff.profilePhoto
+                            img(src=imageUrl alt="profile" class="rounded-circle" height="40px" width="40px")
+                        else
+                            img(class="img-profile rounded-circle" src="/images/default-avatar.png" height="40px" width="40px")
+            
+                    div(class="dropdown-menu dropdown-list2 dropdown-menu-right animated--grow-in" aria-labelledby="userDropdown")
+                        a(class="dropdown-item" href="/staff/settings") Account Settings
+                        div(class="dropdown-divider")
+                        a(class="dropdown-item" href="#" data-toggle="modal" data-target="#StaffLogoutModal")
+                            span Logout
+                    div(class="modal fade" id="StaffLogoutModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+                        div(class="modal-dialog" role="document")
+                            div(class="modal-content")
+                                div(class="modal-header")
+                                    h5(class="modal-title" id="exampleModalLabel") Are you sure?
+                                    button(class="close" type="button" data-dismiss="modal" aria-label="Close")
+                                        span(aria-hidden="true") ×
+                                div(class="modal-body") You will be redirect to the login page.
+                                div(class="modal-footer")
+                                    a(class="ace-btn mr-3" href="/staff/logout") Ok
+                                    button(class="cancel-btn" type="button" data-dismiss="modal") Cancel
+
+
+            if student
+                li(class="nav-item dropdown no-arrow mx-1")
+                    a(class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                        i(class="fa fa-bell fa-fw")
+
+                    div(class="dropdown-list dropdown-menu dropdown-menu-right animated--grow-in" aria-labelledby="alertsDropdown")
+                        h6(class="dropdown-header") Notifications
+                        a(class="dropdown-item d-flex align-items-center" href="#")
+                            div(class="mr-3")
+                                div(class="bg-africa")
+                                    i(class="fa fa-file")
+                            div
+                                div(class="small text-gray-500") Today
+                            
+                div(class="topbar-divider d-none d-sm-block")
+
+                li(class="nav-item dropdown no-arrow")
+                    a(class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                        span(class="mr-2 d-none d-lg-inline small") #{student.lastName} #{student.firstName}
+                        if student.profilePhoto
+                            - let imageUrl = "/uploads/schools/" + code + "/" + className.name + "/" + student.profilePhoto
+                            img(src=imageUrl alt="profile" class="rounded-circle" height="40px" width="40px")
+                        else
+                            img(class="img-profile rounded-circle" src="/images/default-avatar.png" height="40px" width="40px")
+            
+                    div(class="dropdown-menu dropdown-list2 dropdown-menu-right animated--grow-in" aria-labelledby="userDropdown")
+                        a(class="dropdown-item" href="/student/settings") Account Settings
+                        div(class="dropdown-divider")
+                        a(class="dropdown-item" href="#" data-toggle="modal" data-target="#StudentLogoutModal")
+                            span Logout
+                    div(class="modal fade" id="StudentLogoutModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+                        div(class="modal-dialog" role="document")
+                            div(class="modal-content")
+                                div(class="modal-header")
+                                    h5(class="modal-title" id="exampleModalLabel") Are you sure?
+                                    button(class="close" type="button" data-dismiss="modal" aria-label="Close")
+                                        span(aria-hidden="true") ×
+                                div(class="modal-body") You will be redirect to the login page.
+                                div(class="modal-footer")
+                                    a(class="ace-btn mr-3" href="/staff/logout") Ok
+                                    button(class="cancel-btn" type="button" data-dismiss="modal") Cancel
+            
+            if parent
+                li(class="nav-item dropdown no-arrow mx-1")
+                    a(class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                        i(class="fa fa-bell fa-fw")
+
+                    div(class="dropdown-list dropdown-menu dropdown-menu-right animated--grow-in" aria-labelledby="alertsDropdown")
+                        h6(class="dropdown-header") Notifications
+                        a(class="dropdown-item d-flex align-items-center" href="#")
+                            div(class="mr-3")
+                                div(class="bg-africa")
+                                    i(class="fa fa-file")
+                            div
+                                div(class="small text-gray-500") Today
+                            
+                div(class="topbar-divider d-none d-sm-block")
+
+                li(class="nav-item dropdown no-arrow")
+                    a(class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                        span(class="mr-2 d-none d-lg-inline small") #{parent.name}
+                        if parent.profilePhoto
+                            - let imageUrl = "/uploads/schools/" + code + "/parents/" + parent.profilePhoto
+                            img(src=imageUrl alt="profile" class="rounded-circle" height="40px" width="40px")
+                        else
+                            img(class="img-profile rounded-circle" src="/images/default-avatar.png" height="40px" width="40px")
+            
+                    div(class="dropdown-menu dropdown-list2 dropdown-menu-right animated--grow-in" aria-labelledby="userDropdown")
+                        a(class="dropdown-item" href="/parent/settings") Account Settings
+                        div(class="dropdown-divider")
+                        a(class="dropdown-item" href="#" data-toggle="modal" data-target="#ParentLogoutModal")
+                            span Logout
+                    div(class="modal fade" id="ParentLogoutModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+                        div(class="modal-dialog" role="document")
+                            div(class="modal-content")
+                                div(class="modal-header")
+                                    h5(class="modal-title" id="exampleModalLabel") Are you sure?
+                                    button(class="close" type="button" data-dismiss="modal" aria-label="Close")
+                                        span(aria-hidden="true") ×
+                                div(class="modal-body") You will be redirect to the login page.
+                                div(class="modal-footer")
+                                    a(class="ace-btn mr-3" href="/parent/logout") Ok
+                                    button(class="cancel-btn" type="button" data-dismiss="modal") Cancel
